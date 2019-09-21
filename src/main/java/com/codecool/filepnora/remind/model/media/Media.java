@@ -1,9 +1,7 @@
 package com.codecool.filepnora.remind.model.media;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.codecool.filepnora.remind.model.User;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -27,13 +25,19 @@ public class Media {
 
     private LocalDate dateCompleted;
 
+    @Enumerated(EnumType.STRING)
     private Status status;
 
+    @Enumerated(EnumType.STRING)
     private MediaType type;
 
     private String link;
 
     private String image;
+
+    @ManyToOne
+    @EqualsAndHashCode.Exclude
+    private User user;
 
 
 }

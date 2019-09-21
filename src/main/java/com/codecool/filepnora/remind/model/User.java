@@ -2,13 +2,12 @@ package com.codecool.filepnora.remind.model;
 
 import com.codecool.filepnora.remind.model.media.Media;
 import com.codecool.filepnora.remind.model.note.Note;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -29,8 +28,15 @@ public class User {
 
     private LocalDate registrationDate;
 
-    private Media media;
-    private Note note;
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+    @EqualsAndHashCode.Exclude
+    @JsonIgnoreProperties({"user"})
+    private List<Media> media;
+
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+    @EqualsAndHashCode.Exclude
+    @JsonIgnoreProperties({"user"})
+    private List<Note> note;
 
 
 
