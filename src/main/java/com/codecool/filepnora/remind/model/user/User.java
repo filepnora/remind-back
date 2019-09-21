@@ -1,4 +1,4 @@
-package com.codecool.filepnora.remind.model;
+package com.codecool.filepnora.remind.model.user;
 
 import com.codecool.filepnora.remind.model.media.Media;
 import com.codecool.filepnora.remind.model.note.Note;
@@ -20,7 +20,7 @@ public class User {
     @GeneratedValue
     private Long id;
 
-    private String name;
+    private String userName;
 
     private String email;
 

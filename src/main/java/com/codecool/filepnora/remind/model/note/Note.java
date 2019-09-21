@@ -1,6 +1,6 @@
 package com.codecool.filepnora.remind.model.note;
 
-import com.codecool.filepnora.remind.model.User;
+import com.codecool.filepnora.remind.model.user.User;
 import lombok.*;
 
 import javax.persistence.Entity;
