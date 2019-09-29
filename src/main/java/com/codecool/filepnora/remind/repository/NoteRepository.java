@@ -9,12 +9,12 @@ import java.util.List;
 
 public interface NoteRepository extends JpaRepository<Note, Long> {
 
-    @Query("SELECT n FROM note n")
+    @Query("SELECT n FROM Note n")
     List<Note> getAllNotes();
 
     Note getById(Long id);
 
-    @Query(value = "SELECT n FROM note n where user_id = : id", nativeQuery = true)
+    @Query("SELECT n FROM Note n where user_id = : id")
     List<Note> getNotesByUserId(Long userId);
 
 

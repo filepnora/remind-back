@@ -9,11 +9,15 @@ import java.util.List;
 
 public interface MediaRepository extends JpaRepository<Media, Long> {
 
-    @Query("SELECT m FROM media m WHERE user_id = :id")
-    List<Media> getAllMediaByUserId(@Param("id") Long userId);
+    /*@Query("SELECT m FROM Media m WHERE m.user_id = :id and m.type = :media_type")
+    List<Media> getAllMediaByUserIdAndType(@Param("id") Long userId,
+                                           @Param("media_type") String mediaType);
 
-    @Query("SELECT m FROM media m WHERE user_id = :id and status = 'WANT'")
-    List<Media> getAllMediaByUserIdWithStatusWant(Long userId);
+    @Query("SELECT m FROM Media m WHERE m.user_id = :id and m.type = :media_type and m.status = :status")
+    List<Media> getAllMediaByUserIdAndTypeWithStatus(@Param("id") Long userId,
+                                                     @Param("media_type") String mediaType,
+                                                     @Param("status") String status);
+*/
 
     Media getById(Long id);
 
