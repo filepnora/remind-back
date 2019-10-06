@@ -19,7 +19,9 @@ public class Media {
 
     private String title;
 
-    private LocalDate releaseDate;
+    private int releaseDate;
+
+    private String author;
 
     private LocalDate dateAdded;
 
