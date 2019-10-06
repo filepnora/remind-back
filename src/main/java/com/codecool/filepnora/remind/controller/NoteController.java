@@ -19,6 +19,9 @@ public class NoteController {
     @Autowired
     NoteRepository noteRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     @GetMapping("/notes")
     private List<Note> getAllNotes() {
         return noteRepository.getAllNotes();
@@ -32,5 +35,39 @@ public class NoteController {
     @GetMapping("/users/{userId}/notes")
     private List<Note> getNotesForUser(@PathVariable Long userId) {
         return noteRepository.getNotesByUserId(userId);
+    }
+
+
+    @PostMapping("/notes")
+    @ResponseStatus(HttpStatus.CREATED)
+    private void saveNewNote(
+            @RequestParam("userId") String userIdString,
+            @RequestParam("title") String title,
+            @RequestParam("content") String content,
+            @RequestParam("dateCreated") LocalDate dateCreated
+    ) {
+
+        Long userId = Long.valueOf(userIdString);
+        User user = userRepository.getById(userId);
+
+        Note newNote = Note.builder().title(title).content(content).dateCreated(dateCreated).user(user).build();
+
+        noteRepository.save(newNote);
+    }
+
+    @PostMapping("/notes/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    private void editNote(
+            @PathVariable Long id,
+            @RequestParam("title") String title,
+            @RequestParam("content") String content
+    ) {
+
+        Note noteToEdit = noteRepository.getById(id);
+
+        noteToEdit.setTitle(title);
+        noteToEdit.setContent(content);
+
+        noteRepository.save(noteToEdit);
     }
 }
