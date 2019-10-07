@@ -2,6 +2,7 @@ package com.codecool.filepnora.remind.controller;
 
 import com.codecool.filepnora.remind.model.media.Media;
 import com.codecool.filepnora.remind.model.media.MediaType;
+import com.codecool.filepnora.remind.model.media.Status;
 import com.codecool.filepnora.remind.repository.MediaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class MediaController {
 
     @GetMapping("/users/{userId}/{mediaType}/{status}")
     private List<Media> getMediaForUserWislist(@PathVariable Long userId, @PathVariable String mediaType, @PathVariable String status){
-        return mediaRepository.getAllMediaByUserIdAndTypeAndStatus(userId, mediaType, status);
+        return mediaRepository.getAllMediaByUserIdAndTypeAndStatus(userId, MediaType.valueOf(mediaType), Status.valueOf(status));
     }
 
     //dummy
