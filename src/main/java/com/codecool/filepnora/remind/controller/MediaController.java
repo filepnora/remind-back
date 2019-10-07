@@ -1,6 +1,7 @@
 package com.codecool.filepnora.remind.controller;
 
 import com.codecool.filepnora.remind.model.media.Media;
+import com.codecool.filepnora.remind.model.media.MediaType;
 import com.codecool.filepnora.remind.repository.MediaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +15,20 @@ public class MediaController {
     @Autowired
     private MediaRepository mediaRepository;
 
-    @GetMapping("/{user-id}/media")
-    private List<Media> getMediaForUser(@PathVariable Long userId){
-        return mediaRepository.getAllMediaByUserId(userId);
+    @GetMapping("/users/{userId}/{mediaType}")
+    private List<Media> getMediaForUserByMediaType(@PathVariable Long userId, @PathVariable String mediaType){
+        return mediaRepository.getAllMediaByUserIdAndType(userId, MediaType.valueOf(mediaType));
     }
 
-    @GetMapping("/{user-id}/media/want")
-    private List<Media> getMediaForUserWislist(@PathVariable Long userId){
-        return mediaRepository.getAllMediaByUserIdWithStatusWant(userId);
+    @GetMapping("/users/{userId}/{mediaType}/{status}")
+    private List<Media> getMediaForUserWislist(@PathVariable Long userId, @PathVariable String mediaType, @PathVariable String status){
+        return mediaRepository.getAllMediaByUserIdAndTypeAndStatus(userId, mediaType, status);
+    }
+
+    //dummy
+    @GetMapping("/books")
+    private List<Media> getAllBooks(){
+        return mediaRepository.getAllBooks();
     }
 
     @GetMapping("/media/{id}")
